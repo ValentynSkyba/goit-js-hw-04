@@ -1,31 +1,68 @@
-// Напиши функцію slugify(title), яка приймає заголовок статті, параметр title і повертає slug, створений із цього рядка.
+// Напиши функцію isEnoughCapacity(products, containerSize), яка обчислює, чи помістяться всі товари в контейнер при пакуванні.
 
-// Значенням параметра title будуть рядки, слова яких розділені лише пробілами.
-// Усі символи slug повинні бути в нижньому регістрі.
-// Усі слова slug повинні бути розділені тире.
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її роботи.
+// Функція оголошує два параметри:
 
+// products — об’єкт, у якому ключі містять назви товарів, а їхні значення — кількість цих товарів. Наприклад, { apples: 2, grapes: 4 }.
+// containerSize — число, максимальна кількість одиниць товарів, яку в себе може вмістити контейнер.
+// Функція має повернути результат перевірки, чи помістяться всі товари в контейнер. Тобто порахувати загальну кількість товарів в об’єкті products і повернути true, якщо вона менше або дорівнює containerSize, і false, якщо ні.
+
+// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її викликів.
 
 
 "use strict"
-function slugify(title) {
-    return title.toLowerCase().split(" ").join("-");
-}
 
-// Check by ChatGPT
-// function slugify(title) {
-//     title = title.trim(); // Видаляємо початкові та кінцеві пробіли
-//     title = title.toLowerCase(); // Зменшуємо регістр
-//     title = title.replace(/[^a-z0-9 -]/g, '') // Замінюємо недопустимі символи на порожні
-//         .replace(/\s+/g, '-') // Замінюємо пробіли на дефіс
-//         .replace(/-+/g, '-'); // Замінюємо дубльовані дефіси на один дефіс
-//     return title;
-
-//     !!!Використані інщі методи ніж.join зокрема.replace. 
-//     Що таке / \ s g ???
+// Цикл for...in
+    
+    
+// function isEnoughCapacity(products, containerSize) {
+//     let container = 0;
+//     for (const product in products) {
+//         container += products[product];
+//     }
+//     if (container <= containerSize) {
+//         return true;
+//     } else {
+//         return false;
+//     }
 // }
 
-console.log(slugify("Arrays for begginers")); // "arrays-for-begginers"
-console.log(slugify("English for developer")); // "english-for-developer"
-console.log(slugify("Ten secrets of JavaScript")); // "ten-secrets-of-javascript"
-console.log(slugify("How to become a JUNIOR developer in TWO WEEKS")); // "how-to-become-a-junior-developer-in-two-weeks"
+// Метод Object.values()
+
+function isEnoughCapacity(products, containerSize) {
+    let totalProducts = 0;
+    let quantities = Object.values(products);
+    for (const quantity of quantities) {
+        totalProducts += quantity;
+    }
+    return totalProducts <= containerSize;
+}
+
+console.log(
+  isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)
+); // true
+
+console.log(
+  isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)
+); // false
+
+console.log(
+  isEnoughCapacity({ apples: 1, lime: 5, tomatoes: 3 }, 14)
+); // true
+
+console.log(
+  isEnoughCapacity({ apples: 18, potatoes: 5, oranges: 2 }, 7)
+); // false
+
+
+
+// Exampl Lesson 7 module 4-1
+// function getSalarySum(obj) {
+//   let sum = 0;
+//   const values = Object.values(obj);
+
+//   for (const value of values) {
+//     sum += value;
+//   }
+
+//   return sum;
+// }
